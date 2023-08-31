@@ -12,12 +12,25 @@ from bokeh.io import curdoc # import curdoc
 #from Visualization_Corr import Tab_Corellation 
 #from Visualization_Line import Tab_LinePlot
 
+def getDate():
+    from datetime import datetime, timedelta
+    # Get today's date
+    today = datetime.now()
+    # Calculate the first day of the current month
+    first_day_current_month = today.replace(day=1)
+    # Calculate the last day of the previous month
+    last_day_previous_month = first_day_current_month - timedelta(days=1)
+    # Format the date in the desired format (yy-mm-31)
+    formatted_date = last_day_previous_month.replace(day=31).strftime('%Y-%m-%d')
+
+    return formatted_date
+    
 def Tab_Corellation(yf):
     # Inisialisasi variabel List_Saham untuk menentukan pergerakan saham yang akan digunakan
     List_Saham = ["GOOGL", "AMZN", "TSLA", "MSFT", "CSCO", "META"]
 
     # Inisialisasi variabel START dan END untuk menentukan pergerakan saham di awal dan akhir tahun 2021
-    START, END = "2021-5-01", "2022-05-31"
+    START, END = "2021-5-01", getDate()
 
     # Inisialisasi function getSaham digunakan untuk mengambil data dari yfinance
     def getSaham(Saham):
@@ -92,7 +105,7 @@ def Tab_LinePlot(yf):
     # Inisialisasi variabel List_Saham untuk menentukan pergerakan saham yang akan digunakan
     List_Saham = ["GOOGL", "AMZN", "TSLA", "MSFT", "CSCO", "META"]
     # Inisialisasi variabel START dan END untuk menentukan pergerakan saham di awal dan akhir tahun 2021
-    START, END = "2021-5-01", "2022-05-31"
+    START, END = "2021-5-01", getDate()
 
     # Inisialisasi function getSaham digunakan untuk mengambil data dari yfinance
     def getSaham(Saham):
